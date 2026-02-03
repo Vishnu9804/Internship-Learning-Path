@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Vishnu Burkhawala | Application Developer</title>
+    <meta
+      name="description"
+      content="Vishnu Burkhawala is an Application Developer focused on building reliable, scalable, and clean software systems."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- // Desktop Navigation Bar // -->
+    <nav id="desktop-nav" aria-label="Primary navigation">
+      <div class="logo">Vishnu Burkhawala</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- // Hamburger Menu for Mobile // -->
+    <nav id="hamburger-nav" aria-label="Mobile navigation">
+      <div class="logo">Vishnu Burkhawala</div>
+      <div class="hamburger-menu">
+        <button
+          class="hamburger-icon"
+          onclick="toggleMenu()"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section id="about">
+        <div class="section__pic-container">
+          <img
+            src="./assets/Image3.jpg"
+            alt="Portrait of Vishnu Burkhawala"
+            loading="eager"
+            decoding="async"
+            width="400"
+            height="400"
+          />
+        </div>
+
+        <div class="section__text">
+          <p class="section__text__p1">Hello, I'm</p>
+          <h1 class="title">Vishnu Burkhawala</h1>
+
+          <div class="text-container">
+            <p>
+              Application Developer Engineer, focused on building reliable,
+              scalable, and clean software systems. I enjoy solving real-world
+              problems, writing simple and maintainable code, and continuously
+              improving system design and development practices.
+            </p>
+          </div>
+
+          <div class="btn-container">
+            <button
+              class="btn btn-color-2"
+              onclick="window.open('./assets/resume-example.pdf')"
+              aria-label="Download resume"
+            >
+              Download CV
+            </button>
+            <button
+              class="btn btn-color-1"
+              onclick="location.href='./#contact'"
+              aria-label="Go to contact section"
+            >
+              Contact Info
+            </button>
+          </div>
+
+          <div id="socials-container" aria-label="Social media links">
+            <img
+              src="./assets/linkedin.png"
+              class="icon"
+              alt="LinkedIn profile"
+              loading="lazy"
+              decoding="async"
+              width="32"
+              height="32"
+              onclick="location.href='https://www.linkedin.com/in/vishnu-burkhawala-a333b8291/'"
+            />
+            <img
+              src="./assets/github.png"
+              class="icon"
+              alt="GitHub profile"
+              loading="lazy"
+              decoding="async"
+              width="32"
+              height="32"
+              onclick="location.href='https://github.com/Vishnu9804'"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section__text">
+          <h1 class="title">Intuitive.AI</h1>
+          <p class="section__text__p2">Application Developer</p>
+          <div class="text-container">
+            <p>
+              I work as a Application Developer at Intuitive.AI. My role involves
+              developing and maintaining web applications, collaborating with
+              cross-functional teams, and ensuring performance and scalability.
+            </p>
+          </div>
+        </div>
+
+        <div class="experience__pic-container">
+          <img
+            src="./assets/Media.jpg"
+            alt="Intuitive AI workplace"
+            loading="lazy"
+            decoding="async"
+            width="500"
+            height="350"
+          />
+        </div>
+      </section>
+
+      <section id="skills">
+        <p class="section__text__p1">Explore My</p>
+        <h1 class="title">Skills</h1>
+        <div class="experience-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <h2 class="experience-sub-title">Frontend</h2>
+              <div class="article-container">
+                <article><h3>HTML</h3></article>
+                <article><h3>CSS</h3></article>
+                <article><h3>JavaScript</h3></article>
+                <article><h3>React</h3></article>
+              </div>
+            </div>
+
+            <div class="details-container">
+              <h2 class="experience-sub-title">Backend and Database</h2>
+              <div class="article-container">
+                <article><h3>Spring</h3></article>
+                <article><h3>Node JS</h3></article>
+                <article><h3>SQL</h3></article>
+                <article><h3>NoSQL </h3></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <p class="section__text__p1">Browse My Recent</p>
+        <h1 class="title">Projects</h1>
+        <div class="experience-details-container">
+          <div class="about-containers">
+            <div class="details-container color-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Clinico medical application project"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+              <h2 class="project-title">Clinico</h2>
+              <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/Vishnu9804/Clinico---Medical-Application'"
+              >
+                Github
+              </button>
+            </div>
+            </div>
+
+            <div class="details-container color-container">
+              <img
+                src="./assets/project-2.png"
+                alt="Linkify social media application"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+              <h2 class="project-title">Linkify</h2>
+              <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/Vishnu9804/Linkify-FullStack-SocialMedia-Application'"
+              >
+                Github
+              </button>
+            </div>
+            </div>
+
+            <div class="details-container color-container">
+              <img
+                src="./assets/project-3.png"
+                alt="ShelfScrap project"
+                class="project-img"
+                loading="lazy"
+                decoding="async"
+              />
+              <h2 class="project-title">ShelfScrap</h2>
+              <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/Vishnu9804/ShelfScrap'"
+              >
+                Github
+              </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <p class="section__text__p1">Get in Touch</p>
+        <h1 class="title">Contact Me</h1>
+        <div class="contact-info-upper-container">
+          <div class="contact-info-container">
+            <img
+              src="./assets/email.png"
+              alt="Email icon"
+              class="icon contact-icon email-icon"
+              loading="lazy"
+              decoding="async"
+            />
+            <p>
+              <a href="mailto:burkhawalavishnu@gmail.com">
+                burkhawalavishnu@gmail.com
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <nav aria-label="Footer navigation">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p>© 2026 Vishnu Burkhawala. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
