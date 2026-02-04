@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <meta name="description" content="Greenify brings nature to your doorstep with sustainably grown indoor plants. Fresh air, modern look, and easy care." />
+  <title>Greenify | Bring Nature Home</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">Greenify<span class="dot">.</span></a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#products">Plants</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container hamburger-nav-container">
+      <a href="#" class="logo">Greenify<span class="dot">.</span></a>
+
+      <nav aria-label="Mobile navigation" class="hamburger-menu">
+        <button
+          class="hamburger-icon"
+          onclick="toggleMenu()"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        
+        <ul class="menu-links">
+          <li><a href="#benefits" onclick="toggleMenu()">Benefits</a></li>
+          <li><a href="#products" onclick="toggleMenu()">Plants</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-text">
+          <h1>Breathe Life into Your Space.</h1>
+          <p>
+            Discover our curated collection of air-purifying indoor plants. 
+            Perfect for your home or office, delivered straight to your door 
+            in sustainable packaging.
+          </p>
+          <div class="hero-buttons">
+            <a href="#products" class="btn primary-btn">Shop Plants</a>
+            <a href="#benefits" class="btn secondary-btn">Why Us?</a>
+          </div>
+        </div>
+        <!-- <div class="hero-image" role="img" aria-label="A green peaceful aesthetic representation"></div> -->
+        <figure>
+          <img
+          class="hero-image"
+            src="assets/heroimage.jpg"
+            alt="A person holds a small plant in a greenhouse, with the Greenify logo overlaid."
+            loading="lazy"
+            width="600"
+            height="400"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section id="benefits" class="section-padding bg-light">
+      <div class="container">
+        <h2 class="section-title">Why Choose Greenify?</h2>
+        
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Sustainably Grown</h3>
+            <p>Our plants are grown in local eco-friendly nurseries without harmful pesticides.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-truck"></i></div>
+            <h3>Safe Delivery</h3>
+            <p>We use specialized packaging to ensure your plant arrives healthy and happy.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>Lifetime Support</h3>
+            <p>Not a green thumb? Our plant experts are just a message away to help you.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section-padding">
+      <div class="container">
+        <h2 class="section-title">Popular Picks</h2>
+        
+        <div class="grid-3">
+          <article class="product-card">
+            <!-- <div class="product-placeholder plant-1"></div> -->
+             <figure>
+              <img
+                class="product-placeholder plant-1"
+                src="assets/snakeplant.jpg"
+                alt="A person holds a small plant in a greenhouse, with the Greenify logo overlaid."
+                loading="lazy"
+              />
+            </figure>
+            <div class="product-info">
+              <h3>Snake Plant</h3>
+              <p>Best for beginners. Tolerates low light.</p>
+              <span class="price">599.00 Rs</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <!-- <div class="product-placeholder plant-2"></div> -->
+             <figure>
+              <img
+                class="product-placeholder plant-2"
+                src="assets/monstera.jpg"
+                alt="A person holds a small plant in a greenhouse, with the Greenify logo overlaid."
+                loading="lazy"
+              />
+            </figure>
+            <div class="product-info">
+              <h3>Monstera</h3>
+              <p>The classic "Swiss Cheese" plant.</p>
+              <span class="price">1299.00 Rs</span>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <!-- <div class="product-placeholder plant-3"></div> -->
+            <figure>
+              <img
+                class="product-placeholder plant-3"
+                src="assets/peacelily.jpg"
+                alt="A person holds a small plant in a greenhouse, with the Greenify logo overlaid."
+                loading="lazy"
+              />
+            </figure>
+            <div class="product-info">
+              <h3>Peace Lily</h3>
+              <p>Beautiful white blooms and air purifying.</p>
+              <span class="price">999.00 Rs</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-padding bg-dark text-white">
+      <div class="container contact-layout">
+        <div class="contact-text">
+          <h2>Get in Touch</h2>
+          <p>Have questions about plant care or your order? Fill out the form and we'll get back to you within 24 hours.</p>
+        </div>
+
+        <form class="contact-form" id="contactForm" action="#" method="POST" novalidate>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Firstname Lastname" autocomplete="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="email@example.com" autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="How can we help?"></textarea>
+          </div>
+
+          <button type="submit" class="btn primary-btn full-width">Send Message</button>
+        </form>
+
+        <script>
+          // Form Validation Script (Keep existing)
+          document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return;
+            }
+            alert("Thank you for reaching out! We have received your message and will get back to you within 24 hours.");
+            this.reset();
+          });
+
+          // Toggle Menu Function
+          function toggleMenu() {
+            const menu = document.querySelector(".menu-links");
+            const icon = document.querySelector(".hamburger-icon");
+            
+            // Toggle the 'open' class on the menu and icon
+            menu.classList.toggle("open");
+            icon.classList.toggle("open");
+          }
+        </script>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Greenify Plant Shop. Designed for Internship Task.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
