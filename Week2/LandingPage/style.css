@@ -333,6 +333,35 @@ img {
   font-size: 0.9rem;
 }
 
+/* Media Queries For Tablet Screens */
+
+@media (min-width: 600px) {
+  .hero-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .nav-container {
+    display: flex; 
+  }
+
+  .hamburger-nav-container {
+    display: none; 
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Media Queries For Desktop Screens */
 
 @media (min-width: 900px) {
