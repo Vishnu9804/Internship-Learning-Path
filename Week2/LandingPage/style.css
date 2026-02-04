@@ -332,3 +332,45 @@ img {
   color: #888;
   font-size: 0.9rem;
 }
+
+/* Media Queries For Desktop Screens */
+
+@media (min-width: 900px) {
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .nav-container {
+    display: flex; 
+  }
+
+  .hamburger-nav-container {
+    display: none; 
+  }
+
+  .hero-image {
+    margin-top: 0;
+    height: 400px;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+}
