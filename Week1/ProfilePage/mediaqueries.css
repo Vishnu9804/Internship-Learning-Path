@@ -1,0 +1,161 @@
+/* Large Tablets and Laptops (max-width: 1400px) */
+@media screen and (max-width: 1400px) {
+  #about {
+    height: auto; 
+    margin-bottom: 4rem;
+    padding-top: 5vh;
+  }
+  .about-containers {
+    flex-wrap: wrap;
+  }
+  #contact,
+  #projects {
+    height: fit-content;
+  }
+}
+
+/* Tablets and Small Laptops (max-width: 1200px) */
+@media screen and (max-width: 1200px) {
+  #experience {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  #desktop-nav {
+    display: none;
+  }
+  #hamburger-nav {
+    display: flex;
+  }
+  
+  .experience-details-container {
+    margin-top: 2rem;
+  }
+  #about,
+  .section-container {
+    display: flex; /* Stacks image and text vertically */
+    flex-direction: column;
+    justify-content: center;
+  }
+  .arrow {
+    display: none;
+  }
+  section,
+  .section-container {
+    height: fit-content;
+  }
+  section {
+    margin: 0 5%;
+    padding-top: 10vh; /* Adds breathing room at the top of sections */
+  }
+  .section__pic-container {
+    width: 300px;
+    height: 300px;
+    align-self: center;
+  }
+  .experience__pic-container {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+  }
+  .about-containers {
+    margin-top: 0;
+    
+  }
+  .text-container{
+    display: flex;
+    justify-content: center;
+  }
+
+}
+
+/* Mobile Devices (max-width: 600px) */
+@media screen and (max-width: 600px) {
+  #contact,
+  footer {
+    height: auto;
+    padding: 2rem 0;
+  }
+  #experience {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  #about {
+    height: auto;
+    margin-bottom: 2rem;
+    padding-top: 2vh;
+  }
+  article {
+    font-size: 1rem;
+    width: 100%; /* Ensures skills take full width or stack nicely */
+    justify-content: center;
+  }
+  footer nav {
+    height: fit-content;
+    margin-bottom: 2rem;
+  }
+  .about-containers,
+  .contact-info-upper-container,
+  .btn-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .contact-info-container {
+    margin: 0;
+  }
+  .contact-info-container p,
+  .nav-links li a {
+    font-size: 1rem;
+  }
+  .experience-sub-title {
+    font-size: 1.25rem;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  .section__pic-container {
+    width: 250px;
+    height: 250px;
+  }
+  .experience__pic-container {
+    margin-top: 2rem;
+    margin: 0;
+  }
+  .section__text__p2 {
+    font-size: 1.25rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .text-container {
+    text-align: center; /* Better readability on mobile than justify */
+    padding: 0 1rem;
+    display: flex;
+  }
+  .btn {
+    width: 100%; /* Full-width buttons are easier to tap on mobile */
+    max-width: 200px;
+  }
+}
+
+/* Extra Small Devices (max-width: 400px) */
+@media screen and (max-width: 400px) {
+  .section__pic-container,
+  .experience__pic-container {
+    width: 200px;
+    height: 200px;
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+  
+}
