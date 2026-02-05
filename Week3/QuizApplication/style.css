@@ -45,6 +45,8 @@ main {
     padding: var(--spacer-sm);
     width: 100%;
     height: 100%;
+    background: #2d24ab;
+    background: radial-gradient(circle,rgba(45, 36, 171, 1) 0%, rgb(182, 182, 243) 0%, rgba(255, 255, 255, 1) 100%);
 }
 
 .screen {
@@ -140,20 +142,62 @@ main {
     background-color: #b7e4c7;
 }
 
-/* Review Section Styling */
-.review-item {
+#review-container {
+    margin-top: 20px;
+    max-height: 350px;
+    overflow-y: auto;
     text-align: left;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
+    padding-right: 5px; /* Prevent scrollbar overlap */
 }
-.review-correct {
-    color: var(--correct-color);
-    font-weight: bold;
+
+.review-item {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Soft modern shadow */
+    border-left: 5px solid #ccc;
+    transition: transform 0.2s;
 }
-.review-wrong {
-    color: var(--wrong-color);
-    font-weight: bold;
+
+/* Attractive hover effect */
+.review-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
 }
+
+/* Color Coding */
+.review-item.correct {
+    border-left-color: var(--correct-color);
+    background-color: #f4fcf6; /* Very light green tint */
+}
+
+.review-item.wrong {
+    border-left-color: var(--wrong-color);
+    background-color: #fff5f5; /* Very light red tint */
+}
+
+/* Typography */
+.review-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+.review-item p {
+    margin: 4px 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Utility Text Colors */
+.txt-green { color: var(--correct-color); font-weight: bold; }
+.txt-red { color: var(--wrong-color); font-weight: bold; }
+
+/* Custom Scrollbar (Minimal) */
+#review-container::-webkit-scrollbar { width: 6px; }
+#review-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
 
 .footer {
     height: auto;

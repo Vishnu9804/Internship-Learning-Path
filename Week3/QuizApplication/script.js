@@ -159,23 +159,26 @@ function endQuiz() {
 
 function renderReview() {
     reviewContainer.innerHTML = '';
-    
+
     for (var i = 0; i < userAnswers.length; i++) {
         var item = userAnswers[i];
+        var isCorrect = (item.selected === item.correct);
         var div = document.createElement('div');
-        div.className = 'review-item';
-        
-        var status = (item.selected === item.correct) ? 
-            '<span class="review-correct">Correct</span>' : 
-            '<span class="review-wrong">Wrong</span>';
 
-        // Intern-style simple concatenation
-        var html = '<p><strong>Q' + (item.currentIndex + 1) + ': ' + item.question + '</strong></p>';
-        html += '<p>Your Answer: ' + item.options[item.selected] + ' (' + status + ')</p>';
-        if (item.selected !== item.correct) {
-            html += '<p class="review-correct">Correct Answer: ' + item.options[item.correct] + '</p>';
+        div.className = isCorrect ? 'review-item correct' : 'review-item wrong';
+
+        var myAnswer = (item.options && item.options[item.selected]) ? item.options[item.selected] : 'Skipped';
+        var correctAnswer = item.options[item.correct];
+
+        var html = '<strong>' + (i + 1) + '. ' + item.question + '</strong>';
+
+        if (isCorrect) {
+            html += '<p>Your Answer: <span class="txt-green">' + myAnswer + '</span></p>';
+        } else {
+            html += '<p>Your Answer: <span class="txt-red">' + myAnswer + '</span></p>';
+            html += '<p>Correct Answer: <span class="txt-green">' + correctAnswer + '</span></p>';
         }
-        
+
         div.innerHTML = html;
         reviewContainer.appendChild(div);
     }
