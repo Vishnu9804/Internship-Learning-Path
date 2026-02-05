@@ -28,10 +28,15 @@ var optionsContainer = document.getElementById('options-container');
 var timeDisplay = document.getElementById('time');
 var finalScoreDisplay = document.getElementById('final-score');
 var reviewContainer = document.getElementById('review-container');
+var nextButton = document.getElementById('next-btn');
+var previousButton = document.getElementById('previous-btn');
+var exitButton = document.getElementById('exit-btn');
 
 function startQuiz() {
     startScreen.classList.add('hidden');
     quizScreen.classList.remove('hidden');
+    nextButton.classList.remove('hidden');
+    exitButton.classList.remove('hidden');
     currentQuestionIndex = 0;
     score = 0;
     timeLeft = 60;
@@ -55,6 +60,18 @@ function loadQuestion() {
     
     var currentQuestion = questions[currentQuestionIndex];
     questionText.textContent = (currentQuestionIndex + 1) + ". " + currentQuestion.question;
+
+    if(currentQuestionIndex < 1) {
+        previousButton.classList.add('hidden');
+    } else {
+        previousButton.classList.remove('hidden');  
+    }
+
+    if(currentQuestionIndex === questions.length - 1) {
+        nextButton.classList.add('hidden');
+    } else {
+        nextButton.classList.remove('hidden');
+    }
 
     // Create buttons for options
     for (var i = 0; i < currentQuestion.options.length; i++) {
@@ -91,6 +108,27 @@ function selectAnswer(selectedIndex) {
         loadQuestion();
     } else {
         endQuiz();
+    }
+}
+
+function nextQuestion() {
+    currentQuestionIndex++; 
+    if (currentQuestionIndex < questions.length - 1) {
+        loadQuestion();
+    } else {
+        nextButton.classList.add('hidden');
+        loadQuestion();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion();
+    }
+    else
+    {
+        previousButton.classList.add('hidden');
     }
 }
 
