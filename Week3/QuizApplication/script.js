@@ -73,12 +73,23 @@ function loadQuestion() {
         nextButton.classList.remove('hidden');
     }
 
-    // Create buttons for options
+    var selectedOption = null;
+
+    if(userAnswers[currentQuestionIndex]) {
+        selectedOption = userAnswers[currentQuestionIndex].selected;
+    }
+
     for (var i = 0; i < currentQuestion.options.length; i++) {
         var btn = document.createElement('button');
         btn.textContent = currentQuestion.options[i];
-        btn.className = 'option-btn';
-        // Use an IIFE or helper to capture index properly in var loop
+        if(selectedOption === i) {
+            btn.className = 'option-btn selected';
+        }
+        else {            
+            btn.className = 'option-btn';
+            console.log('Option index: ' + i);
+        }
+
         btn.setAttribute('data-index', i);
         btn.onclick = function(e) {
             selectAnswer(parseInt(e.target.getAttribute('data-index')));
@@ -159,7 +170,7 @@ function renderReview() {
             '<span class="review-wrong">Wrong</span>';
 
         // Intern-style simple concatenation
-        var html = '<p><strong>Q' + (i + 1) + ': ' + item.question + '</strong></p>';
+        var html = '<p><strong>Q' + (item.currentIndex + 1) + ': ' + item.question + '</strong></p>';
         html += '<p>Your Answer: ' + item.options[item.selected] + ' (' + status + ')</p>';
         if (item.selected !== item.correct) {
             html += '<p class="review-correct">Correct Answer: ' + item.options[item.correct] + '</p>';

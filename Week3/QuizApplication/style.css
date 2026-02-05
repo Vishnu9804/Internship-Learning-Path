@@ -110,6 +110,11 @@ main {
     margin-top: var(--spacer-sm);
 }
 
+.option-btn.selected {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+}
+
 .btn:hover {
     background-color: var(--primary-color);
 }
