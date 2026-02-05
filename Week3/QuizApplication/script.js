@@ -119,7 +119,7 @@ function selectAnswer(selectedIndex) {
         score++;
     }
 
-    currentQuestionIndex++;
+    // currentQuestionIndex++;
 
     if (currentQuestionIndex < questions.length) {
         loadQuestion();
