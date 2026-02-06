@@ -69,6 +69,45 @@ main {
     display: none;
 }
 
+/* --- New Palette Styles --- */
+.palette-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.palette-item {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+/* Style for Answered Questions (Colored) */
+.palette-item.answered {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border-color: var(--secondary-color);
+}
+
+/* Style for Current Question (Highlighted) */
+.palette-item.active {
+    border: 2px solid var(--text-dark);
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+/* -------------------------- */
+
 .navigation-buttons {
     margin-top: var(--spacer-sm);
     display: flex;
