@@ -34,7 +34,7 @@
   }
   #about,
   .section-container {
-    display: flex; /* Stacks image and text vertically */
+    display: flex; 
     flex-direction: column;
     justify-content: center;
   }
@@ -47,7 +47,7 @@
   }
   section {
     margin: 0 5%;
-    padding-top: 10vh; /* Adds breathing room at the top of sections */
+    padding-top: 10vh; 
   }
   .section__pic-container {
     width: 300px;
@@ -89,7 +89,7 @@
   }
   article {
     font-size: 1rem;
-    width: 100%; /* Ensures skills take full width or stack nicely */
+    width: 100%; 
     justify-content: center;
   }
   footer nav {
@@ -137,12 +137,12 @@
     font-size: 2rem;
   }
   .text-container {
-    text-align: center; /* Better readability on mobile than justify */
+    text-align: center; 
     padding: 0 1rem;
     display: flex;
   }
   .btn {
-    width: 100%; /* Full-width buttons are easier to tap on mobile */
+    width: 100%; 
     max-width: 200px;
   }
 }
