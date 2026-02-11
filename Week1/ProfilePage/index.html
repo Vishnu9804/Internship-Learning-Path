@@ -4,16 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta name="theme-color" content="#ffffff" />
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:;">
 
     <title>Vishnu Burkhawala | Application Developer</title>
     <meta
       name="description"
       content="Vishnu Burkhawala is an Application Developer focused on building reliable, scalable, and clean software systems."
     />
+
+    <link rel="icon" href="./assets/checkmark.png" type="image/png" />
+
+    <link rel="preload" href="./assets/Image3.jpg" as="image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <!-- Desktop Navigation Bar -->
     <nav id="desktop-nav" aria-label="Primary navigation">
       <div class="logo">Vishnu Burkhawala</div>
       <ul class="nav-links">
@@ -23,7 +40,6 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <!-- Hamburger Menu for Mobile -->
     <nav id="hamburger-nav" aria-label="Mobile navigation">
       <div class="logo">Vishnu Burkhawala</div>
       <div class="hamburger-menu">
@@ -47,14 +63,13 @@
     </nav>
 
     <main>
-      <!-- About Section -->
       <section id="about">
         <div class="section__pic-container">
           <img
             src="./assets/Image3.jpg"
             alt="Portrait of Vishnu Burkhawala"
             loading="eager"
-            decoding="async"
+            fetchpriority="high"
             width="400"
             height="400"
           />
@@ -74,48 +89,61 @@
           </div>
 
           <div class="btn-container">
-            <button
+            <a
+              href="./assets/resume-example.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn-color-2"
-              onclick="window.open('./assets/resume-example.pdf')"
               aria-label="Download resume"
             >
               Download CV
-            </button>
-            <button
+            </a>
+            <a
+              href="#contact"
               class="btn btn-color-1"
-              onclick="location.href='./#contact'"
               aria-label="Go to contact section"
             >
               Contact Info
-            </button>
+            </a>
           </div>
 
           <div id="socials-container" aria-label="Social media links">
-            <img
-              src="./assets/linkedin.png"
-              class="icon"
-              alt="LinkedIn profile"
-              loading="lazy"
-              decoding="async"
-              width="32"
-              height="32"
-              onclick="location.href='https://www.linkedin.com/in/vishnu-burkhawala-a333b8291/'"
-            />
-            <img
-              src="./assets/github.png"
-              class="icon"
-              alt="GitHub profile"
-              loading="lazy"
-              decoding="async"
-              width="32"
-              height="32"
-              onclick="location.href='https://github.com/Vishnu9804'"
-            />
+            <a
+              href="https://www.linkedin.com/in/vishnu-burkhawala-a333b8291/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+            >
+              <img
+                src="./assets/linkedin.png"
+                class="icon"
+                alt="LinkedIn"
+                loading="lazy"
+                decoding="async"
+                width="32"
+                height="32"
+              />
+            </a>
+            <a
+              href="https://github.com/Vishnu9804"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub Profile"
+            >
+              <img
+                src="./assets/github.png"
+                class="icon"
+                alt="GitHub"
+                loading="lazy"
+                decoding="async"
+                width="32"
+                height="32"
+              />
+            </a>
           </div>
         </div>
       </section>
 
-      <!-- Experience Section -->
       <section id="experience">
         <div class="section__text">
           <h1 class="title">Intuitive.AI</h1>
@@ -141,7 +169,6 @@
         </div>
       </section>
 
-      <!-- Skills Section -->
       <section id="skills">
         <p class="section__text__p1">Explore My</p>
         <h1 class="title">Skills</h1>
@@ -163,14 +190,13 @@
                 <article><h3>Spring</h3></article>
                 <article><h3>Node JS</h3></article>
                 <article><h3>SQL</h3></article>
-                <article><h3>NoSQL </h3></article>
+                <article><h3>NoSQL</h3></article>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Projects Section -->
       <section id="projects">
         <p class="section__text__p1">Browse My Recent</p>
         <h1 class="title">Projects</h1>
@@ -183,60 +209,71 @@
                 class="project-img"
                 loading="lazy"
                 decoding="async"
+                width="500"
+                height="500"
               />
               <h2 class="project-title">Clinico</h2>
               <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/Vishnu9804/Clinico---Medical-Application'"
-              >
-                Github
-              </button>
-            </div>
+                <a
+                  href="https://github.com/Vishnu9804/Clinico---Medical-Application"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-color-2 project-btn"
+                >
+                  Github
+                </a>
+              </div>
             </div>
 
             <div class="details-container color-container">
-              <img
+               <img
                 src="./assets/project-2.png"
                 alt="Linkify social media application"
                 class="project-img"
                 loading="lazy"
                 decoding="async"
+                width="500"
+                height="500"
               />
               <h2 class="project-title">Linkify</h2>
               <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/Vishnu9804/Linkify-FullStack-SocialMedia-Application'"
-              >
-                Github
-              </button>
-            </div>
+                <a
+                  href="https://github.com/Vishnu9804/Linkify-FullStack-SocialMedia-Application"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-color-2 project-btn"
+                >
+                  Github
+                </a>
+              </div>
             </div>
 
             <div class="details-container color-container">
-              <img
+               <img
                 src="./assets/project-3.png"
                 alt="ShelfScrap project"
                 class="project-img"
                 loading="lazy"
                 decoding="async"
+                width="500"
+                height="500"
               />
               <h2 class="project-title">ShelfScrap</h2>
               <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/Vishnu9804/ShelfScrap'"
-              >
-                Github
-              </button>
-            </div>
+                <a
+                  href="https://github.com/Vishnu9804/ShelfScrap"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-color-2 project-btn"
+                >
+                  Github
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Contact Section -->
       <section id="contact">
         <p class="section__text__p1">Get in Touch</p>
         <h1 class="title">Contact Me</h1>
@@ -248,6 +285,8 @@
               class="icon contact-icon email-icon"
               loading="lazy"
               decoding="async"
+              width="32"
+              height="32"
             />
             <p>
               <a href="mailto:burkhawalavishnu@gmail.com">
@@ -259,7 +298,6 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
       <nav aria-label="Footer navigation">
         <ul class="nav-links">

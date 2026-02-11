@@ -1,5 +1,5 @@
 import { questions } from './data/questions.js';
-import { calculateScore, isQuizOver } from './utils/quizLogic.js';
+import { calculateScore, isQuizOver, isStartOfQuiz } from './utils/quizLogic.js';
 
 // --- State Variables ---
 let state = {
@@ -161,8 +161,8 @@ const nextQuestion = () => {
 };
 
 const previousQuestion = () => {
-    // Go back if not first
-    if (state.currentQuestionIndex > 0) {
+    // Go to previous question if not first
+    if (!isStartOfQuiz(state.currentQuestionIndex)) {
         state.currentQuestionIndex--;
         loadQuestion();
     }
