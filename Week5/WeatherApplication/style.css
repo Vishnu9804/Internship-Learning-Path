@@ -82,12 +82,15 @@ body {
 }
 
 .details {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
     margin-top: 50px;
 }
 
 .col {
+    display: flex;
     align-items: center;
     text-align: center;
 }
@@ -97,7 +100,7 @@ body {
     margin-right: 10px;
 }
 
-.wind {
+.humidity, .wind {
     font-size: 28px;
     margin-top: -6px;
 }

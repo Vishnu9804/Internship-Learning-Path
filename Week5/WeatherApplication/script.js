@@ -27,20 +27,30 @@ async function checkWeather(cityName) {
         const name = geoData.results[0].name;
 
         // STEP 2: Get Weather using those Coordinates
-        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+        // Updated to use the new 'current' parameter with specific variables
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code`;
         const weatherResponse = await fetch(weatherUrl);
         const weatherData = await weatherResponse.json();
 
         // STEP 3: Update UI
-        const current = weatherData.current_weather;
+        // We now access 'current' instead of 'current_weather'
+        const current = weatherData.current;
 
         document.querySelector(".city").innerHTML = name;
-        document.querySelector(".temp").innerHTML = Math.round(current.temperature) + "°c";
-        document.querySelector(".wind").innerHTML = current.windspeed + " km/h"; 
+        
+        // precise variable: temperature_2m
+        document.querySelector(".temp").innerHTML = Math.round(current.temperature_2m) + "°c";
+        
+        // precise variable: wind_speed_10m
+        document.querySelector(".wind").innerHTML = current.wind_speed_10m + " km/h"; 
 
+        // precise variable: relative_humidity_2m
+        document.querySelector(".humidity").innerHTML = current.relative_humidity_2m + "%";
+        
         // Update Icons based on WMO codes (Open-Meteo uses codes)
         // Code 0 = Clear, 1-3 = Cloudy, 50-60 = Rain, etc.
-        const code = current.weathercode;
+        // precise variable: weather_code
+        const code = current.weather_code;
         
         if (code === 0) {
              weatherIcon.src = "https://cdn-icons-png.flaticon.com/512/869/869869.png"; // Clear
