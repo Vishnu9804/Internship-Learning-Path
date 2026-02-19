@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h2>Project 3: Throttling (Rate Limiting)</h2>
+    <p>Try clicking the button as fast as you can!</p>
+
+    <button id="shootBtn" style="padding: 20px; font-size: 20px;">FIRE WEAPON!</button>
+    
+    <h3>Clicks Attempted: <span id="attempts">0</span></h3>
+    <h3>Actual Shots Fired: <span id="fired">0</span></h3>
+    <h3 id="msg" style="color: blue;">Ready</h3>
+
+    <script>
+        const btn = document.getElementById("shootBtn");
+        const attemptsSpan = document.getElementById("attempts");
+        const firedSpan = document.getElementById("fired");
+        const msg = document.getElementById("msg");
+
+        let attempts = 0;
+        let shots = 0;
+        let isGunReady = true; 
+
+        btn.addEventListener("click", () => {
+            attempts++;
+            attemptsSpan.innerText = attempts;
+
+            if (isGunReady) {
+                fireWeapon();
+
+                isGunReady = false; 
+                msg.innerText = "RELOADING...";
+                msg.style.color = "red";
+
+                setTimeout(() => {
+                    isGunReady = true;
+                    msg.innerText = "Ready to fire";
+                    msg.style.color = "blue";
+                }, 2000); 
+            } else {
+                console.log("Click ignored - Throttled");
+            }
+        });
+
+        function fireWeapon() {
+            shots++;
+            firedSpan.innerText = shots;
+            console.log("BANG!");
+        }
+    </script>
+</body>
+</html>
