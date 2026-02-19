@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Unforgettable Notepad</h2>
+    <textarea id="area" rows="10" cols="30" placeholder="Type here...."></textarea>
+    <br>
+    <button id="clear">Clear</button>
+    <script>
+        const noteArea = document.getElementById("area");
+        const clearBtn = document.getElementById("clearBtn");
+
+        const savedNote = localStorage.getItem("myDraft");
+        
+        if (savedNote) {
+            noteArea.value = savedNote;
+        }
+
+        noteArea.addEventListener("input", () => {
+            localStorage.setItem("myDraft", noteArea.value);
+            console.log("Saved to LocalStorage:", noteArea.value);
+        });
+
+        clearBtn.addEventListener("click", () => {
+            localStorage.removeItem("myDraft");
+            noteArea.value = "";
+            alert("Memory Cleared!");
+        });
+    </script>
+
+</body>
+</html>
