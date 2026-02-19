@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <h2>Project 2: Debouncing Logic</h2>
+    <p>Open Console (F12) to see the difference.</p>
+
+    <label>Normal Search (Bad for APIs):</label><br>
+    <input type="text" id="normalInput" placeholder="Type here...">
+    <p>API Calls: <span id="normalCount">0</span></p>
+
+    <br><br>
+
+    <label>Debounced Search (Good for APIs):</label><br>
+    <input type="text" id="debouncedInput" placeholder="Type here...">
+    <p>API Calls: <span id="debounceCount">0</span> <span id="status" style="color:red"></span></p>
+
+    <script>
+        const normalInput = document.getElementById("normalInput");
+        const normalCountSpan = document.getElementById("normalCount");
+        let normalCount = 0;
+
+        normalInput.addEventListener("input", () => {
+            normalCount++;
+            normalCountSpan.innerText = normalCount;
+            console.log("Normal fetch: " + normalInput.value);
+        });
+
+        const debouncedInput = document.getElementById("debouncedInput");
+        const debounceCountSpan = document.getElementById("debounceCount");
+        let debounceCount = 0;
+        let timer;
+
+        debouncedInput.addEventListener("input", () => {
+
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                debounceCount++;
+                debounceCountSpan.innerText = debounceCount;
+                console.log("DEBOUNCED fetch: " + debouncedInput.value);
+            }, 1000); 
+        });
+    </script>
+</body>
+</html>
