@@ -199,3 +199,8 @@ li.completed .checkbox-btn {
   transition: color 0.2s;
 }
 .delete-btn:hover { color: var(--danger); }
+
+.empty-state { text-align: center; padding: 50px 20px; color: var(--text-muted); }
+.empty-state.hidden { display: none; }
+.empty-icon { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
+.empty-state h3 { color: var(--text-main); margin-bottom: 5px; }
