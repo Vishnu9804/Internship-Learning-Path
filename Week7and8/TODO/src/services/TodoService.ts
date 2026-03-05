@@ -36,4 +36,26 @@ export class TodoService {
   getTodos(): Todo[] {
     return [...this.todos];
   }
+
+  // Task Categories
+  getUniqueCategories(): Set<string> {
+    return new Set(this.todos.map(todo => todo.category));
+  }
+
+  // Categories filtering
+  getTodosByCategory(): Map<string, Todo[]> {
+    const map = new Map<string, Todo[]>();
+    this.todos.forEach(todo => {
+      const current = map.get(todo.category) || [];
+      map.set(todo.category, [...current, todo]);
+    });
+    return map;
+  }
+
+  //Filter based on status
+  getFilteredTodos(filter: 'all' | 'active' | 'completed'): Todo[] {
+    if (filter === 'active') return this.todos.filter(t => !t.completed);
+    if (filter === 'completed') return this.todos.filter(t => t.completed);
+    return [...this.todos];
+  }
 }
