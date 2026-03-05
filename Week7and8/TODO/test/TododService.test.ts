@@ -24,4 +24,23 @@ describe('TodoService', () => {
     s = s.deleteTodo(id);
     expect(s.getTodos().length).toBe(0);
   });
+  
+  test('should return unique categories using Set', () => {
+    let s = service.addTodo('Task 1', 'Work');
+    s = s.addTodo('Task 2', 'Work');
+    s = s.addTodo('Task 3', 'Personal');
+
+    const categories = s.getUniqueCategories();
+    expect(categories.size).toBe(2);
+    expect(categories.has('Work')).toBe(true);
+  });
+
+  test('should group todos by category using Map', () => {
+    let s = service.addTodo('Task 1', 'Work');
+    s = s.addTodo('Task 2', 'Personal');
+
+    const map = s.getTodosByCategory();
+    expect(map.get('Work')?.length).toBe(1);
+    expect(map.get('Personal')?.length).toBe(1);
+  });
 });
