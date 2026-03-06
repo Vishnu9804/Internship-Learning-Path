@@ -48,4 +48,32 @@ describe('TodoService', () => {
     expect(map.get('Work')?.length).toBe(1);
     expect(map.get('Personal')?.length).toBe(1);
   });
+
+  test('should perfectly filter todos by their active or completed status', () => {
+    //Mock Date.now() to ensure the two tasks get completely unique IDs
+    jest.spyOn(Date, 'now')
+      .mockReturnValueOnce(1000)
+      .mockReturnValueOnce(2000);
+
+    let s = service.addTodo('Task 1', 'Work');
+    s = s.addTodo('Task 2', 'Personal');
+
+    jest.restoreAllMocks();
+
+    const task1Id = s.getTodos()[0].id;
+    s = s.toggleTodo(task1Id); 
+
+    const allTodos = s.getFilteredTodos('all');
+    expect(allTodos.length).toBe(2);
+
+    const completedTodos = s.getFilteredTodos('completed');
+    expect(completedTodos.length).toBe(1);
+    expect(completedTodos[0].title).toBe('Task 1');
+    expect(completedTodos[0].completed).toBe(true);
+
+    const activeTodos = s.getFilteredTodos('active');
+    expect(activeTodos.length).toBe(1);
+    expect(activeTodos[0].title).toBe('Task 2'); 
+    expect(activeTodos[0].completed).toBe(false);
+  });
 });
