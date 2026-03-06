@@ -9,22 +9,41 @@
 </head>
 <body>
   <div class="app-container">
+    
     <aside class="sidebar">
       <div class="logo">
-        <span class="logo-icon">✓</span><h2>TaskMaster</h2>
+        <span class="logo-icon">✓</span>
+        <h2>TaskMaster</h2>
       </div>
+      
       <div class="nav-section">
         <p class="nav-label">VIEWS</p>
-        <button class="nav-btn active" data-filter="all"><span>All Tasks</span></button>
-        <button class="nav-btn" data-filter="active"><span>Active</span></button>
-        <button class="nav-btn" data-filter="completed"><span>Completed</span></button>
+        <button class="nav-btn active" data-filter="all">
+          <span>All Tasks</span>
+        </button>
+        <button class="nav-btn" data-filter="active">
+          <span>Active</span>
+        </button>
+        <button class="nav-btn" data-filter="completed">
+          <span>Completed</span>
+        </button>
       </div>
     </aside>
 
     <main class="main-content">
       <header class="main-header">
-        <h1 id="view-title">All Tasks</h1>
-        <p class="subtitle">Manage your daily workflow.</p>
+        <div class="header-title-row">
+          <div>
+            <h1 id="view-title">All Tasks</h1>
+            <p class="subtitle">Manage your daily workflow.</p>
+          </div>
+          
+          <div class="category-dropdown">
+            <button id="category-dropdown-btn" class="dropdown-btn">All Categories ▾</button>
+            <ul id="category-dropdown-list" class="dropdown-list hidden">
+              </ul>
+          </div>
+        </div>
       </header>
       
       <section class="input-section">
@@ -45,7 +64,9 @@
         </div>
       </section>
     </main>
+
   </div>
+
   <script type="module" src="./dist/core/app.js"></script>
 </body>
 </html>
