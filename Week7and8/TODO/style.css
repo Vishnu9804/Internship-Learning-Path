@@ -11,6 +11,7 @@
   --text-muted: #6b7280;
   --border-color: #e5e7eb;
   --danger: #ef4444;
+  --danger-light: #fef2f2;
   --success: #10b981;
 }
 
@@ -166,6 +167,7 @@ body {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap; /* Allows wrap if screen gets small */
 }
 
 input {
@@ -178,7 +180,11 @@ input {
   transition: border-color 0.2s;
 }
 input:focus { border-color: var(--primary-color); }
-#category-input { flex: 0.4; }
+
+/* Sizes to fit 3 inputs cleanly */
+#todo-input { flex: 2; min-width: 200px; }
+#category-input { flex: 0.8; min-width: 120px; }
+#due-date-input { flex: 0.8; min-width: 130px; color: var(--text-muted); }
 
 .btn-primary {
   background: var(--primary-color);
@@ -189,6 +195,7 @@ input:focus { border-color: var(--primary-color); }
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 .btn-primary:hover { background: var(--primary-hover); }
 
@@ -209,14 +216,22 @@ li.task-row {
 }
 li.task-row:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
 
-.task-info { display: flex; align-items: center; gap: 15px; flex: 1; }
+.task-info { display: flex; align-items: flex-start; gap: 15px; flex: 1; }
+
+.task-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .category-badge {
   background: #e0e7ff;
   color: var(--primary-color);
   padding: 4px 10px;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
+  align-self: flex-start;
 }
 .task-title { font-size: 1rem; font-weight: 500; color: var(--text-main); transition: color 0.2s; }
 
@@ -236,6 +251,7 @@ li.completed .category-badge { background: #f3f4f6; color: var(--text-muted); }
   align-items: center;
   color: transparent;
   transition: all 0.2s;
+  margin-top: 5px; /* Aligns with multi-line content */
 }
 li.completed .checkbox-btn {
   background: var(--success);
@@ -258,3 +274,40 @@ li.completed .checkbox-btn {
 .empty-state.hidden { display: none; }
 .empty-icon { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
 .empty-state h3 { color: var(--text-main); margin-bottom: 5px; }
+
+/* --- Due Date & Overdue Modifiers --- */
+.task-dates {
+  display: flex;
+  gap: 10px;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+.date-badge {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.overdue-text {
+  color: var(--danger);
+  font-weight: 600;
+}
+.completed-text {
+  color: var(--success);
+  font-weight: 600;
+}
+
+li.task-row.overdue {
+  border-color: var(--danger);
+  background-color: var(--danger-light);
+}
+li.task-row.overdue .task-title {
+  color: var(--danger);
+}
+
+/* Ensure a completed task overrides the red styling even if its date is past due */
+li.task-row.completed.overdue {
+  border-color: var(--border-color);
+  background-color: var(--card-bg);
+}
+li.task-row.completed.overdue .task-title {
+  color: var(--text-muted);
+}

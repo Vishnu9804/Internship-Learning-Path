@@ -3,4 +3,6 @@ export interface Todo {
   readonly title: string;
   readonly completed: boolean;
   readonly category: string;
+  readonly dueDate: string;
+  readonly completedDate?: string;
 }

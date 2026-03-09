@@ -7,22 +7,31 @@ export class TodoService {
     this.todos = initialTodos;
   }
 
-  // Service to add task
-  addTodo(title: string, category: string): TodoService {
+  // Service to add task (now requires dueDate)
+  addTodo(title: string, category: string, dueDate: string): TodoService {
     const newTodo: Todo = { 
       id: Date.now().toString(), 
       title, 
       completed: false, 
-      category 
+      category,
+      dueDate
     };
     return new TodoService([...this.todos, newTodo]);
   }
 
-  // Service for toggle the Task for complete
+  // Service for toggle the Task for complete (adds completedDate)
   toggleTodo(id: string): TodoService {
-    const updated = this.todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
+    const updated = this.todos.map(todo => {
+      if (todo.id === id) {
+        const isCompleted = !todo.completed;
+        return { 
+          ...todo, 
+          completed: isCompleted,
+          completedDate: isCompleted ? new Date().toISOString() : undefined
+        };
+      }
+      return todo;
+    });
     return new TodoService(updated);
   }
 

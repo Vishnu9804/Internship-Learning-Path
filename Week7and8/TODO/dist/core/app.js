@@ -11,16 +11,16 @@ function saveTodos(todos) {
 // State
 let service = new TodoService(loadTodos());
 let currentFilter = 'all';
-let currentCategory = 'All Categories'; // NEW STATE FOR DROPDOWN
+let currentCategory = 'All Categories';
 // DOM Elements
 const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
 const categoryInput = document.getElementById('category-input');
+const dueDateInput = document.getElementById('due-date-input');
 const list = document.getElementById('todo-list');
 const filterButtons = document.querySelectorAll('.nav-btn');
 const viewTitle = document.getElementById('view-title');
 const emptyState = document.getElementById('empty-state');
-// NEW: Dropdown Elements
 const categoryDropdownBtn = document.getElementById('category-dropdown-btn');
 const categoryDropdownList = document.getElementById('category-dropdown-list');
 // Render Function
@@ -28,7 +28,7 @@ function render() {
     list.innerHTML = '';
     // 1. Filter by Main Status (All/Active/Completed)
     let todosToRender = service.getFilteredTodos(currentFilter);
-    // Safety feature: If user deleted the last task of a filtered category, reset it to All
+    // Safety feature
     const uniqueCategories = service.getUniqueCategories();
     if (currentCategory !== 'All Categories' && !uniqueCategories.has(currentCategory)) {
         currentCategory = 'All Categories';
@@ -38,6 +38,10 @@ function render() {
     if (currentCategory !== 'All Categories') {
         todosToRender = todosToRender.filter(todo => todo.category === currentCategory);
     }
+    // 3. SORT BY DUE DATE (Nearest first, furthest later)
+    todosToRender.sort((a, b) => {
+        return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    });
     // Handle Empty State visibility
     if (todosToRender.length === 0) {
         emptyState.classList.remove('hidden');
@@ -45,16 +49,35 @@ function render() {
     else {
         emptyState.classList.add('hidden');
     }
+    // Setup current date (ignoring time) to check for overdues
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     // Render Tasks
     todosToRender.forEach(todo => {
         const li = document.createElement('li');
-        // Important: Added 'task-row' class to match new CSS specificity
-        li.className = `task-row ${todo.completed ? 'completed' : ''}`;
+        // Check if overdue
+        const taskDueDate = new Date(todo.dueDate);
+        taskDueDate.setHours(0, 0, 0, 0);
+        const isOverdue = !todo.completed && taskDueDate < today;
+        // Apply classes based on status
+        li.className = `task-row ${todo.completed ? 'completed' : ''} ${isOverdue ? 'overdue' : ''}`;
+        // Formulate Date HTML 
+        let dateHtml = `<span class="date-badge">📅 ${todo.dueDate}</span>`;
+        if (todo.completed && todo.completedDate) {
+            const formattedCompletedDate = new Date(todo.completedDate).toLocaleDateString();
+            dateHtml += `<span class="date-badge completed-text">✓ Completed on: ${formattedCompletedDate}</span>`;
+        }
+        else if (isOverdue) {
+            dateHtml += `<span class="date-badge overdue-text">⚠️ Overdue</span>`;
+        }
         li.innerHTML = `
       <div class="task-info">
         <button class="checkbox-btn" data-id="${todo.id}">✔</button>
-        <span class="category-badge">${todo.category}</span>
-        <span class="task-title">${todo.title}</span>
+        <div class="task-content-wrapper">
+          <span class="category-badge">${todo.category}</span>
+          <span class="task-title">${todo.title}</span>
+          <div class="task-dates">${dateHtml}</div>
+        </div>
       </div>
       <button class="delete-btn" data-id="${todo.id}">🗑</button>
     `;
@@ -67,7 +90,6 @@ function render() {
         const li = document.createElement('li');
         li.className = 'dropdown-item';
         li.textContent = cat;
-        // Highlight the currently selected category in the list
         if (cat === currentCategory) {
             li.style.fontWeight = 'bold';
             li.style.color = 'var(--primary-color)';
@@ -88,7 +110,6 @@ categoryDropdownBtn.addEventListener('click', (e) => {
     categoryDropdownList.classList.toggle('hidden');
 });
 document.addEventListener('click', (e) => {
-    // If the user clicks outside the dropdown container, hide it
     if (!categoryDropdownBtn.contains(e.target) && !categoryDropdownList.contains(e.target)) {
         categoryDropdownList.classList.add('hidden');
     }
@@ -96,12 +117,13 @@ document.addEventListener('click', (e) => {
 // Event Listeners
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (!input.value.trim())
+    if (!input.value.trim() || !dueDateInput.value)
         return;
     const category = categoryInput.value.trim() || 'General';
-    service = service.addTodo(input.value, category);
+    service = service.addTodo(input.value, category, dueDateInput.value);
     input.value = '';
     categoryInput.value = '';
+    dueDateInput.value = '';
     render();
 });
 list.addEventListener('click', (e) => {
