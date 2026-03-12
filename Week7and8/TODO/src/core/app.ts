@@ -1,6 +1,11 @@
 import { TodoService } from '../services/TodoService.js';
 import { Todo } from '../models/models.js';
 
+// NEW: Request Browser Notification Permission on app load
+if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+  Notification.requestPermission();
+}
+
 // Persistence logic
 const STORAGE_KEY = 'my_todos';
 function loadTodos(): Todo[] {
@@ -60,9 +65,14 @@ function render() {
     emptyState.classList.add('hidden');
   }
 
-  // Setup current date (ignoring time) to check for overdues
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // Setup dates for overdue checking and notifications
+  const todayObj = new Date();
+  todayObj.setHours(0, 0, 0, 0);
+  
+  const todayStr = new Date().toISOString().split('T')[0];
+  const tomorrowObj = new Date();
+  tomorrowObj.setDate(tomorrowObj.getDate() + 1);
+  const tomorrowStr = tomorrowObj.toISOString().split('T')[0];
 
   // Render Tasks
   todosToRender.forEach(todo => {
@@ -71,7 +81,20 @@ function render() {
     // Check if overdue
     const taskDueDate = new Date(todo.dueDate);
     taskDueDate.setHours(0, 0, 0, 0);
-    const isOverdue = !todo.completed && taskDueDate < today;
+    const isOverdue = !todo.completed && taskDueDate < todayObj;
+
+    // --- SMART NOTIFICATION LOGIC ---
+    if (!todo.completed && !todo.notified && (todo.dueDate === tomorrowStr || todo.dueDate === todayStr)) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('TaskMaster Reminder', {
+          body: `Your task "${todo.title}" is due ${todo.dueDate === todayStr ? 'TODAY' : 'TOMORROW'}!`,
+          icon: '📅'
+        });
+        // Immediately mark immutably so it doesn't spam on the next render
+        service = service.markAsNotified(todo.id);
+      }
+    }
+    // --------------------------------
 
     // Apply classes based on status
     li.className = `task-row ${todo.completed ? 'completed' : ''} ${isOverdue ? 'overdue' : ''}`;
@@ -122,7 +145,7 @@ function render() {
     categoryDropdownList.appendChild(li);
   });
 
-  saveTodos(service.getTodos());
+  saveTodos(service.getTodos()); // This perfectly captures the updated notification state!
 }
 
 // Dropdown Toggles and click-away listeners

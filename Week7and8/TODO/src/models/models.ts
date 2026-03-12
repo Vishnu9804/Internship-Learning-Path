@@ -5,4 +5,5 @@ export interface Todo {
   readonly category: string;
   readonly dueDate: string;
   readonly completedDate?: string;
+  readonly notified?: boolean; 
 }

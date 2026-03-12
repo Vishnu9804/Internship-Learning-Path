@@ -7,19 +7,20 @@ export class TodoService {
     this.todos = initialTodos;
   }
 
-  // Service to add task (now requires dueDate)
+  // Service to add task
   addTodo(title: string, category: string, dueDate: string): TodoService {
     const newTodo: Todo = { 
       id: Date.now().toString(), 
       title, 
       completed: false, 
       category,
-      dueDate
+      dueDate,
+      notified: false // explicitly start as not notified
     };
     return new TodoService([...this.todos, newTodo]);
   }
 
-  // Service for toggle the Task for complete (adds completedDate)
+  // Service for toggle the Task for complete
   toggleTodo(id: string): TodoService {
     const updated = this.todos.map(todo => {
       if (todo.id === id) {
@@ -39,6 +40,14 @@ export class TodoService {
   deleteTodo(id: string): TodoService {
     const filtered = this.todos.filter(todo => todo.id !== id);
     return new TodoService(filtered);
+  }
+
+  // NEW: Mark task as notified immutably
+  markAsNotified(id: string): TodoService {
+    const updated = this.todos.map(todo =>
+      todo.id === id ? { ...todo, notified: true } : todo
+    );
+    return new TodoService(updated);
   }
 
   // Service to get TODO
