@@ -1,0 +1,9 @@
+<form class="container" [formGroup] = "createForm">
+    <h2>Create Snippet</h2>
+    <hr/>
+    <br/>
+    <input type="text" placeholder="Enter title" [formControl] = "title" /><h5 class="red-text" [hidden]="title.valid || title.untouched">Title field Cannot be empty</h5>
+    <textarea type="text" placeholder="Enter code" [formControl] = "code"></textarea><h5 class="red-text" [hidden]="code.valid || code.untouched">Code field cannot be empty</h5>
+
+    <button class="btn-green" [disabled] = "createForm.invalid" (click)="save()">Create</button>
+</form>
