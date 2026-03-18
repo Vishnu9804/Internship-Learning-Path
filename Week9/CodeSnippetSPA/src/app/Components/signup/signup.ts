@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class Signup {
 
-  constructor(private router:Router){
+  constructor(private authService: Auth, private router:Router){
 
   }
 
@@ -31,7 +32,8 @@ export class Signup {
 
   register(){
     console.log(this.signupForm.value)
-    this.router.navigate(['/login'])
+    // this.router.navigate(['/login'])
+    this.authService.registerUser(this.email.value || '',this.password.value || '')
   }
   reset(){
     this.signupForm.reset()

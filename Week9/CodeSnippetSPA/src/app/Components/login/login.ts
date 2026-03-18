@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Auth } from '../../services/auth';
 // import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -10,6 +11,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 
 export class Login {
+
+  constructor(private authService:Auth){}
+
   email = new FormControl("",[
     Validators.required,
     Validators.email
@@ -27,6 +31,7 @@ export class Login {
 
   login(){
     console.log(this.loginForm.value)
+    this.authService.loginUser(this.email.value!, this.password.value!)
   }
   reset(){
     this.loginForm.reset()

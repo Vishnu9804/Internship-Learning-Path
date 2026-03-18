@@ -2,10 +2,14 @@
     <nav>
         <h2><a routerLink="/">CodeSnippetSPA</a></h2>
         <ul>
-            <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-            <li><a routerLink="/signup" routerLinkActive="active">Signup</a></li>
+            @if(authService.isAuthenticated()){
+                <li (click) = "authService.logout()">Logout</li>
+                <li><a routerLink="/create" routerLinkActive="active">create</a></li>
+            }@else{
+                <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+                <li><a routerLink="/signup" routerLinkActive="active">Signup</a></li>
+            }
             <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-            <li><a routerLink="/create" routerLinkActive="active">create</a></li>
         </ul>
     </nav>
     <hr />

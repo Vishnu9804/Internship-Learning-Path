@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './Components/navbar/navbar';
+import { initializeApp } from "firebase/app";
+import {firebaseConfig} from "../../firebaseConfig"
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,7 @@ import { Navbar } from './Components/navbar/navbar';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('CodeSnippetSPA');
+  constructor(){
+    initializeApp(firebaseConfig);
+  }
 }
