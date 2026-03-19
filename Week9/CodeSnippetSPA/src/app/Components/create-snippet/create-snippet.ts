@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Db } from '../../services/db';
+import { Snippet } from '../../../models/snippet';
 
 @Component({
   selector: 'app-create-snippet',
@@ -9,6 +11,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 
 export class CreateSnippet {
+
+  constructor(private dbService: Db){}
+
   title = new FormControl("",[
     Validators.required
   ])
@@ -22,7 +27,8 @@ export class CreateSnippet {
     code:this.code
   })
 
-  save(){
-    console.log(this.createForm.value)
+  async save(){
+    console.log("Here :",this.createForm.value)
+    await this.dbService.createSnippet(this.createForm.value as Snippet)
   }
 }

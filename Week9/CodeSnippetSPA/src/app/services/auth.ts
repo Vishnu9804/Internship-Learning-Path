@@ -29,20 +29,27 @@ export class Auth {
     return this.uid() !== null; // Use () to read a signal
   }
 
-  registerUser(email: string, password: string){  
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
+  getUid()
+  {
+    return this.uid();
+  }
+
+registerUser(email: string, password: string) {
+    // 1. Create the user
+    createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        console.log(user)
-        this.router.navigate(['/'])
+        // 2. Immediately sign them out!
+        return signOut(this.auth); 
+      })
+      .then(() => {
+        // 3. NOW redirect to the login page
+        console.log("Account created successfully. User kept logged out.");
+        this.router.navigate(['/login']);
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
-        alert("Something went wrong while signup")
+        alert("Something went wrong while signup: " + errorMessage);
       });
   }
 
@@ -66,7 +73,9 @@ export class Auth {
   logout()
   {
     const auth = getAuth();
-    signOut(auth).catch((error) => {
+    signOut(auth).then(() => {
+      this.router.navigate(["/login"])
+    }).catch((error) => {
       // An error happened.
     });
   }

@@ -1,0 +1,15 @@
+<div>
+    <ul>
+        @if(isLoading()){
+            <li>Loading snippets... </li>
+        } 
+        @else if(items().length == 0){
+            <li>No Code Snippet to Show</li>
+        } 
+        @else {
+            @for(item of items(); track item.id){
+                <li><a [routerLink]="['/snippet', item.id]">{{item.title}}</a></li>
+            }
+        }
+    </ul>
+</div>
