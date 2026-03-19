@@ -1,9 +1,23 @@
-<form class="container" [formGroup] = "createForm">
-    <h2>Create Snippet</h2>
-    <hr/>
-    <br/>
-    <input type="text" placeholder="Enter title" [formControl] = "title" /><h5 class="red-text" [hidden]="title.valid || title.untouched">Title field Cannot be empty</h5>
-    <textarea type="text" placeholder="Enter code" [formControl] = "code"></textarea><h5 class="red-text" [hidden]="code.valid || code.untouched">Code field cannot be empty</h5>
+<div class="page-container">
+    <form class="card form-container" [formGroup]="createForm">
+        <h2 class="form-title">Create Snippet</h2>
+        
+        <div class="form-group">
+            <input type="text" placeholder="Snippet Title" [formControl]="title" />
+            @if(title.invalid && title.touched){
+                <span class="error-text">Title field cannot be empty</span>
+            }
+        </div>
 
-    <button class="btn-green" [disabled] = "createForm.invalid" (click)="save()">Create</button>
-</form>
+        <div class="form-group">
+            <textarea placeholder="Paste your code here..." [formControl]="code"></textarea>
+            @if(code.invalid && code.touched){
+                <span class="error-text">Code field cannot be empty</span>
+            }
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" [disabled]="createForm.invalid" (click)="save()">Save Snippet</button>
+        </div>
+    </form>
+</div>

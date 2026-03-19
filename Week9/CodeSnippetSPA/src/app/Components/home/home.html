@@ -1,15 +1,17 @@
-<div>
-    <ul>
+<div class="page-container">
+    <div class="snippet-grid">
         @if(isLoading()){
-            <li>Loading snippets... </li>
+            <div class="empty-state">Loading snippets... ⏳</div>
         } 
         @else if(items().length == 0){
-            <li>No Code Snippet to Show</li>
+            <div class="empty-state">No Code Snippets found. Be the first to create one!</div>
         } 
         @else {
             @for(item of items(); track item.id){
-                <li><a [routerLink]="['/snippet', item.id]">{{item.title}}</a></li>
+                <div class="snippet-card">
+                    <a [routerLink]="['/snippet', item.id]">{{item.title}}</a>
+                </div>
             }
         }
-    </ul>
+    </div>
 </div>

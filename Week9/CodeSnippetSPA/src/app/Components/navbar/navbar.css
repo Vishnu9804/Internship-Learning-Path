@@ -1,36 +1,49 @@
-/* Apply styles to the navigation bar */
-div {
-    margin: 10px;
+nav {
+    background: var(--card-bg);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    border-bottom: 1px solid var(--border);
 }
 
-nav {
-    display: flex;
-    padding: 10px;
-    justify-content: space-between;
-
+.logo a {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
-    gap: 20px;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
 }
 
-li:hover{
+a, .logout-btn {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s;
     cursor: pointer;
 }
 
-.logout{
-    color: red;
+a:hover, .logout-btn:hover {
+    color: var(--text-main);
+}
+
+ul li a.active {
+    color: var(--primary);
     font-weight: 700;
 }
 
-a{
-    text-decoration: none;
-    color: black;
+.logout-btn {
+    color: var(--danger);
+    font-weight: 600;
 }
-ul li a.active {
-    font-weight: 700;
+.logout-btn:hover {
+    color: var(--danger-hover);
 }

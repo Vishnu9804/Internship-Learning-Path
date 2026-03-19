@@ -1,18 +1,39 @@
-
-ul {
-    list-style: none;
+.snippet-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-ul li{
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
+/* The rest of your CSS remains exactly the same! */
+.snippet-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease-in-out;
 }
-a{
+
+.snippet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+    border-color: var(--primary);
+}
+
+.snippet-card a {
+    display: block;
+    padding: 1.5rem;
+    color: var(--text-main);
     text-decoration: none;
-    color: black;
+    font-weight: 600;
+    font-size: 1.2rem; /* I bumped the font size up slightly since the card is wider! */
 }
-ul li:hover{
-    cursor: pointer;
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 4rem;
+    font-size: 1.2rem;
+    padding: 3rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px dashed var(--border);
 }

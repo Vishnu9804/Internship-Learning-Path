@@ -1,4 +1,14 @@
-<div>
-    <h3>{{codeSnippet().title}}</h3>
-    <pre>{{codeSnippet().code}}</pre>
+<div class="page-container">
+    <div class="snippet-header">
+        <h2 class="snippet-title">{{codeSnippet().title}}</h2>
+    </div>
+
+    <div class="code-window">
+        <div class="mac-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <pre><code>{{codeSnippet().code}}</code></pre>
+    </div>
 </div>

@@ -1,10 +1,24 @@
-<form class="container" [formGroup] = "loginForm">
-    <h2>Login form</h2>
-    <hr/>
-    <br/>
-    <input type="email" placeholder="Enter Email" [formControl] = "email" /><h5 class="red-text" [hidden]="email.valid || email.untouched">Enter Correct Email</h5>
-    <input type="password" placeholder="Enter password" [formControl] = "password" /><h5 class="red-text" [hidden]="password.valid || password.untouched">password length must be minimum 6</h5>
+<div class="page-container">
+    <form class="card" style="max-width: 450px; margin: 0 auto;" [formGroup]="loginForm">
+        <h2 style="margin-bottom: 1.5rem;">Welcome Back</h2>
+        
+        <div class="form-group">
+            <input type="email" placeholder="Email Address" [formControl]="email" />
+            @if(email.invalid && email.touched){
+                <span class="error-text">Please enter a valid email</span>
+            }
+        </div>
 
-    <button class="btn-green" [disabled] = "loginForm.invalid" (click)="login()">Login</button>
-    <button class="btn-red" (click)="reset()">Reset</button>
-</form>
+        <div class="form-group">
+            <input type="password" placeholder="Password" [formControl]="password" />
+            @if(password.invalid && password.touched){
+                <span class="error-text">Password must be at least 6 characters</span>
+            }
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 1.5rem;">
+            <button class="btn btn-primary" style="flex: 1;" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+            <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+    </form>
+</div>
