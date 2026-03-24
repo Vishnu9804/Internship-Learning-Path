@@ -35,6 +35,9 @@ export class TaskService {
           const newlyCompleted = !task.completed;
           if (newlyCompleted) {
             this.gameEngine.recordTaskCompletion(task.priority);
+          } else {
+            // Revert points if the user unchecks the task
+            this.gameEngine.revertTaskCompletion(task.priority);
           }
           return { ...task, completed: newlyCompleted };
         }

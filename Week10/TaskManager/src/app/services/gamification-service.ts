@@ -58,6 +58,30 @@ export class GamificationService {
     }));
   }
 
+  revertTaskCompletion(priority: 'High' | 'Medium' | 'Low') {
+    const basePoints = priority === 'High' ? 50 : priority === 'Medium' ? 30 : 10;
+    const p = this.profile();
+    
+    // Calculate multiplier based on current streak to accurately reverse the points
+    const multiplier = p.streak >= 7 ? 2 : (p.streak >= 3 ? 1.5 : 1);
+    const lostPoints = Math.round(basePoints * multiplier);
+
+    const today = this.getTodayStr();
+    const updatedHistory = { ...p.history };
+    
+    // Decrease the task count for today's heatmap if it exists
+    if (updatedHistory[today] && updatedHistory[today] > 0) {
+      updatedHistory[today] -= 1;
+    }
+
+    this.profile.update(current => ({
+      ...current,
+      // Use Math.max to ensure points never drop below 0
+      points: Math.max(0, current.points - lostPoints), 
+      history: updatedHistory
+    }));
+  }
+
   buyStreakFreeze() {
     const cost = 500;
     if (this.profile().points >= cost) {
