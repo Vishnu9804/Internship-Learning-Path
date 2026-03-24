@@ -17,7 +17,7 @@ export class HeatmapComponent {
   days = computed(() => {
     const result = [];
     const hist = this._history();
-    for (let i = 29; i >= 0; i--) {
+    for (let i = 59; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
       const dateStr = d.toISOString().split('T')[0];
@@ -27,7 +27,7 @@ export class HeatmapComponent {
   });
 
   getColor(count: number): string {
-    if (count === 0) return '#161b22';
+    if (count === 0) return '#4e545c';
     if (count <= 2) return '#0e4429';
     if (count <= 4) return '#006d32';
     if (count <= 6) return '#26a641';

@@ -1,46 +1,161 @@
-.app-container {
-  max-width: 600px;
-  margin: 3rem auto;
-  font-family: sans-serif;
-}
 
-.task-input-section {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+  .app-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem 1rem;
+  }
 
-.task-input { flex-grow: 1; padding: 10px; border-radius: 4px; border: 1px solid #ccc; }
-.priority-select { padding: 10px; border-radius: 4px; border: 1px solid #ccc; }
-.add-btn { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  /* Header Styles */
+  .profile-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--panel-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
 
-.task-list { display: flex; flex-direction: column; gap: 10px; }
+  .level-info h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    color: var(--text-main);
+  }
 
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  background: #f9f9f9;
-}
+  .points-badge {
+    margin: 0;
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
 
-.task-item.completed { opacity: 0.5; }
-.task-item.completed .title { text-decoration: line-through; }
+  .streak-shop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
 
-.task-content { display: flex; align-items: center; gap: 15px; }
+  .streak-box {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
 
-.priority-badge {
-  font-size: 0.8em;
-  padding: 3px 8px;
-  border-radius: 12px;
-  margin-left: 10px;
-  font-weight: bold;
-}
-.priority-badge.high { background: #ffebee; color: #c62828; }
-.priority-badge.medium { background: #fff8e1; color: #f57f17; }
-.priority-badge.low { background: #e3f2fd; color: #1565c0; }
+  .fire-emoji { filter: grayscale(1); }
+  .fire-emoji.on-fire { filter: none; }
+  
+  .multiplier { font-size: 0.8rem; color: var(--accent-color); }
 
-.delete-btn { color: red; background: none; border: none; cursor: pointer; }
-.empty-state { text-align: center; color: #888; padding: 2rem; }
+  .shop-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .shop-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .shop-btn:hover:not(:disabled) { border-color: var(--text-main); }
+  .inventory { color: var(--text-muted); margin-left: 4px; }
+
+  /* Form Styles */
+  .task-input-section {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .task-input, .priority-select {
+    padding: 12px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-main);
+    outline: none;
+  }
+  
+  .task-input { flex-grow: 1; font-size: 1rem; }
+  .task-input:focus { border-color: var(--accent-color); }
+
+  .add-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .add-btn:hover { background: var(--accent-hover); }
+
+  /* Task List Styles */
+  .task-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--panel-bg);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: opacity 0.3s;
+  }
+
+  .task-item.completed {
+    opacity: 0.5;
+  }
+
+  .task-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .task-item.completed .title {
+    text-decoration: line-through;
+  }
+
+  .priority-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 12px;
+    width: max-content;
+    font-weight: bold;
+  }
+
+  .priority-badge.high { background: rgba(248, 81, 73, 0.1); color: var(--high-priority); }
+  .priority-badge.medium { background: rgba(210, 153, 34, 0.1); color: var(--medium-priority); }
+  .priority-badge.low { background: rgba(47, 129, 247, 0.1); color: var(--low-priority); }
+
+  .delete-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    opacity: 0.5;
+  }
+  .delete-btn:hover { opacity: 1; }
+
+  .empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+  }

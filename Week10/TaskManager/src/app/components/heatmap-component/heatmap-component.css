@@ -1,5 +1,28 @@
-    .heatmap-container { margin-top: 1.5rem; background: var(--panel-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); }
-    .heatmap-grid { display: grid; grid-template-columns: repeat(15, 1fr); gap: 4px; }
-    .heatmap-box { width: 14px; height: 14px; border-radius: 3px; cursor: pointer; transition: transform 0.2s; }
-    .heatmap-box:hover { transform: scale(1.2); }
-    .heatmap-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right; }
+    .heatmap-container { 
+         margin-top: 1.5rem;
+         background: var(--panel-bg);
+         padding: 1rem;
+         border-radius: 8px;
+         border: 1px solid var(--border-color);
+     }
+    .heatmap-grid { 
+         display: grid;
+         grid-template-columns: repeat(20, 18px);
+         gap: 10px;
+     }
+    .heatmap-box { 
+         width: 20px;
+         height: 20px;
+         border-radius: 3px;
+         cursor: pointer;
+         transition: transform 0.1s;
+     }
+    .heatmap-box:hover { 
+        transform: scale(1.2);
+     }
+    .heatmap-label { 
+         font-size: 0.75rem;
+         color: var(--text-muted);
+         margin-top: 0.5rem;
+         text-align: right;
+     }
