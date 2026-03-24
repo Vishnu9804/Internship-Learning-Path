@@ -1,1 +1,12 @@
-<p>heatmap-component works!</p>
+    <div class="heatmap-container">
+      <div class="heatmap-grid">
+        @for (day of days(); track day.date) {
+          <div 
+            class="heatmap-box" 
+            [ngStyle]="{'background-color': getColor(day.count)}"
+            [title]="day.date + ': ' + day.count + ' tasks'"
+          ></div>
+        }
+      </div>
+      <p class="heatmap-label">Last 30 Days Contribution</p>
+    </div>
