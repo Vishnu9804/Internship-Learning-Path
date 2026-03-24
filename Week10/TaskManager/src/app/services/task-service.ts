@@ -16,33 +16,37 @@ export class TaskService {
     });
   }
 
-  addTask(title: string, priority: Priority) {
+  addTask(title: string, priority: Priority, dueDate: string | null) {
     if (!title.trim()) return;
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
       priority,
       completed: false,
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      dueDate
     };
-    this.tasks.update(t => [newTask, ...t]);
+
+    this.tasks.update(t => this.sortTasks([newTask, ...t]));
   }
 
   toggleTaskCompletion(id: string) {
     this.tasks.update(currentTasks => {
-      return currentTasks.map(task => {
+      const updated = currentTasks.map(task => {
         if (task.id === id) {
           const newlyCompleted = !task.completed;
           if (newlyCompleted) {
             this.gameEngine.recordTaskCompletion(task.priority);
           } else {
-            // Revert points if the user unchecks the task
+
             this.gameEngine.revertTaskCompletion(task.priority);
           }
           return { ...task, completed: newlyCompleted };
         }
         return task;
       });
+
+      return this.sortTasks(updated);
     });
   }
 
@@ -51,12 +55,29 @@ export class TaskService {
   }
 
   private loadTasks(): Task[] {
-    // Check if we are running in the browser before accessing localStorage
+
     if (typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem(this.STORAGE_KEY);
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        return this.sortTasks(JSON.parse(saved));
+      }
     }
-    
     return [];
+  }
+
+
+  private sortTasks(tasks: Task[]): Task[] {
+    return tasks.sort((a, b) => {
+
+      if (a.dueDate && b.dueDate) {
+        return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+      }
+
+      if (a.dueDate) return -1;
+      if (b.dueDate) return 1;
+      
+
+      return b.createdAt - a.createdAt;
+    });
   }
 }

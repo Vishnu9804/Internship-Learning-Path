@@ -6,6 +6,7 @@ export interface Task {
   priority: Priority;
   completed: boolean;
   createdAt: number;
+  dueDate: string | null;
 }
 
 export interface UserProfile {

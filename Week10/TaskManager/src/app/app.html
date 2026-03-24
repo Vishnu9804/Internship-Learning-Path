@@ -31,6 +31,12 @@
       placeholder="What needs to be done?"
       class="task-input"
     />
+    <input 
+      type="date" 
+      [value]="newTaskDueDate() || ''" 
+      (change)="updateDueDate($event)" 
+      class="date-input"
+    />
     <select [value]="newTaskPriority()" (change)="updatePriority($event)" class="priority-select">
       <option value="High">High Priority (50 XP)</option>
       <option value="Medium">Medium Priority (30 XP)</option>
@@ -41,13 +47,20 @@
 
   <section class="task-list">
     @for (task of taskService.tasks(); track task.id) {
-      <div class="task-item" [class.completed]="task.completed">
+      <div class="task-item" [class.completed]="task.completed" [class.overdue]="!task.completed && isOverdue(task.dueDate)">
         
         <div class="task-content">
           <input type="checkbox" [checked]="task.completed" (change)="taskService.toggleTaskCompletion(task.id)">
           <div class="task-details">
             <span class="title">{{ task.title }}</span>
-            <span class="priority-badge" [class]="task.priority.toLowerCase()">{{ task.priority }}</span>
+            <div class="badges-row">
+              <span class="priority-badge" [class]="task.priority.toLowerCase()">{{ task.priority }}</span>
+              @if (task.dueDate) {
+                <span class="due-date-badge" [class.overdue-text]="!task.completed && isOverdue(task.dueDate)">
+                  📅 {{ task.dueDate }}
+                </span>
+              }
+            </div>
           </div>
         </div>
 
@@ -58,4 +71,3 @@
     }
   </section>
 </main>
-

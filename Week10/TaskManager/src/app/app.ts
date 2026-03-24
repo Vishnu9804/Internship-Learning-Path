@@ -16,6 +16,7 @@ export class App {
 
   newTaskTitle = signal('');
   newTaskPriority = signal<Priority>('Medium');
+  newTaskDueDate = signal<string | null>(null);
 
   updateTitle(event: Event) {
     this.newTaskTitle.set((event.target as HTMLInputElement).value);
@@ -25,8 +26,24 @@ export class App {
     this.newTaskPriority.set((event.target as HTMLSelectElement).value as Priority);
   }
 
+  updateDueDate(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.newTaskDueDate.set(value ? value : null);
+  }
+
   submitTask() {
-    this.taskService.addTask(this.newTaskTitle(), this.newTaskPriority());
+    this.taskService.addTask(this.newTaskTitle(), this.newTaskPriority(), this.newTaskDueDate());
+
     this.newTaskTitle.set('');
+    this.newTaskDueDate.set(null); 
+  }
+
+  isOverdue(dueDate: string | null): boolean {
+    if (!dueDate) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+    const taskDate = new Date(dueDate);
+    taskDate.setHours(0, 0, 0, 0); 
+    return taskDate < today;
   }
 }
