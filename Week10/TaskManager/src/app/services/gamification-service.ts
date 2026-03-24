@@ -1,9 +1,7 @@
 import { Injectable, signal, effect, computed } from '@angular/core';
 import { UserProfile, LEVELS } from '../models/types';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class GamificationService {
   private readonly STORAGE_KEY = 'gamified_profile';
 

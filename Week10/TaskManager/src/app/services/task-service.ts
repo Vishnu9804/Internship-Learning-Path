@@ -1,5 +1,6 @@
 import { Injectable, signal, effect } from '@angular/core';
 import { Task, Priority } from '../models/types';
+import { GamificationService } from './gamification-service';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -7,8 +8,7 @@ export class TaskService {
   
   tasks = signal<Task[]>(this.loadTasks());
 
-  constructor() {
-    // Auto-save whenever tasks change
+  constructor(private gameEngine: GamificationService) {
     effect(() => {
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.tasks()));
@@ -32,7 +32,11 @@ export class TaskService {
     this.tasks.update(currentTasks => {
       return currentTasks.map(task => {
         if (task.id === id) {
-          return { ...task, completed: !task.completed };
+          const newlyCompleted = !task.completed;
+          if (newlyCompleted) {
+            this.gameEngine.recordTaskCompletion(task.priority);
+          }
+          return { ...task, completed: newlyCompleted };
         }
         return task;
       });
@@ -44,10 +48,12 @@ export class TaskService {
   }
 
   private loadTasks(): Task[] {
+    // Check if we are running in the browser before accessing localStorage
     if (typeof localStorage !== 'undefined') {
       const saved = localStorage.getItem(this.STORAGE_KEY);
       return saved ? JSON.parse(saved) : [];
     }
+    
     return [];
   }
 }

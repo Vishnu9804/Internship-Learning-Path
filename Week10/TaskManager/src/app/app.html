@@ -1,7 +1,26 @@
 <main class="app-container">
-  <header>
-    <h1>Task Manager - Core System</h1>
+  
+  <header class="profile-banner">
+    <div class="level-info">
+      <h1>{{ gameEngine.currentLevel() }}</h1>
+      <p class="points-badge">{{ gameEngine.profile().points }} XP</p>
+    </div>
+    
+    <div class="streak-shop">
+      <div class="streak-box">
+        <span class="fire-emoji" [class.on-fire]="gameEngine.profile().streak >= 7">🔥</span>
+        <span>{{ gameEngine.profile().streak }} Day Streak</span>
+        <span class="multiplier">({{ gameEngine.currentMultiplier() }}x Points)</span>
+      </div>
+      
+      <button class="shop-btn" (click)="gameEngine.buyStreakFreeze()" [disabled]="gameEngine.profile().points < 500">
+        🧊 Buy Freeze (500 XP) 
+        <span class="inventory">Owned: {{ gameEngine.profile().streakFreezes }}</span>
+      </button>
+    </div>
   </header>
+
+  <app-heatmap [history]="gameEngine.profile().history"></app-heatmap>
 
   <section class="task-input-section">
     <input 
@@ -13,16 +32,17 @@
       class="task-input"
     />
     <select [value]="newTaskPriority()" (change)="updatePriority($event)" class="priority-select">
-      <option value="High">High</option>
-      <option value="Medium">Medium</option>
-      <option value="Low">Low</option>
+      <option value="High">High Priority (50 XP)</option>
+      <option value="Medium">Medium Priority (30 XP)</option>
+      <option value="Low">Low Priority (10 XP)</option>
     </select>
-    <button (click)="submitTask()" class="add-btn">Add Task</button>
+    <button (click)="submitTask()" class="add-btn">Add Quest</button>
   </section>
 
   <section class="task-list">
     @for (task of taskService.tasks(); track task.id) {
       <div class="task-item" [class.completed]="task.completed">
+        
         <div class="task-content">
           <input type="checkbox" [checked]="task.completed" (change)="taskService.toggleTaskCompletion(task.id)">
           <div class="task-details">
@@ -30,10 +50,12 @@
             <span class="priority-badge" [class]="task.priority.toLowerCase()">{{ task.priority }}</span>
           </div>
         </div>
-        <button class="delete-btn" (click)="taskService.deleteTask(task.id)">Delete</button>
+
+        <button class="delete-btn" (click)="taskService.deleteTask(task.id)">🗑️</button>
       </div>
     } @empty {
-      <div class="empty-state">No tasks yet. Add one above!</div>
+      <div class="empty-state">No active quests. Time to relax!</div>
     }
   </section>
 </main>
+
