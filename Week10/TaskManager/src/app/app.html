@@ -3,7 +3,10 @@
   <header class="profile-banner">
     <div class="level-info">
       <h1>{{ gameEngine.currentLevel() }}</h1>
-      <p class="points-badge">{{ gameEngine.profile().points }} XP</p>
+      <div class="badge-row">
+        <p class="points-badge">{{ gameEngine.profile().points }} XP</p>
+        <button class="rules-btn" (click)="toggleRules()">📜 Rules</button>
+      </div>
     </div>
     
     <div class="streak-shop">
@@ -45,8 +48,21 @@
     <button (click)="submitTask()" class="add-btn">Add Quest</button>
   </section>
 
+  <section class="task-list-header">
+    <h2 class="section-title">Current Quests</h2>
+    <div class="filter-controls">
+      <label for="priorityFilter">Filter:</label>
+      <select id="priorityFilter" [value]="currentFilter()" (change)="updateFilter($event)" class="filter-select">
+        <option value="All">All Quests</option>
+        <option value="High">High Priority Only</option>
+        <option value="Medium">Medium Priority Only</option>
+        <option value="Low">Low Priority Only</option>
+      </select>
+    </div>
+  </section>
+
   <section class="task-list">
-    @for (task of taskService.tasks(); track task.id) {
+    @for (task of filteredTasks(); track task.id) {
       <div class="task-item" [class.completed]="task.completed" [class.overdue]="!task.completed && isOverdue(task.dueDate)">
         
         <div class="task-content">
@@ -67,7 +83,55 @@
         <button class="delete-btn" (click)="taskService.deleteTask(task.id)">🗑️</button>
       </div>
     } @empty {
-      <div class="empty-state">No active quests. Time to relax!</div>
+      <div class="empty-state">No active quests found. Time to relax!</div>
     }
   </section>
+
+  @if (showRules()) {
+    <div class="modal-overlay" (click)="toggleRules()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h2>📜 Game Rules & Mechanics</h2>
+          <button class="close-modal-btn" (click)="toggleRules()">✖</button>
+        </div>
+        <div class="modal-body">
+          <div class="rule-block">
+            <h3>🎯 XP & Priorities</h3>
+            <p>Every task you complete grants XP based on its priority level.</p>
+            <ul>
+              <li><span style="color: var(--high-priority)">High Priority:</span> 50 XP</li>
+              <li><span style="color: var(--medium-priority)">Medium Priority:</span> 30 XP</li>
+              <li><span style="color: var(--low-priority)">Low Priority:</span> 10 XP</li>
+            </ul>
+          </div>
+          
+          <div class="rule-block">
+            <h3>🔥 Daily Streaks & Multipliers</h3>
+            <p>Complete at least one task a day to build your streak and earn bonus XP on every task!</p>
+            <ul>
+              <li><strong>1-2 Days:</strong> 1.0x (Standard XP)</li>
+              <li><strong>3-6 Days:</strong> 1.5x Multiplier</li>
+              <li><strong>7+ Days:</strong> 2.0x Multiplier (On Fire!)</li>
+            </ul>
+          </div>
+
+          <div class="rule-block">
+            <h3>🧊 Streak Freezes</h3>
+            <p>Life happens! If you miss a day of productivity, a <strong>Streak Freeze</strong> will automatically be consumed to prevent your streak from resetting to zero. You can purchase them from the top right menu for <strong>500 XP</strong> each.</p>
+          </div>
+
+          <div class="rule-block">
+            <h3>🎖 Titles & Levels</h3>
+            <p>Your total lifetime XP determines your rank:</p>
+            <ul>
+              <li><strong>0 XP:</strong> Procrastinator</li>
+              <li><strong>101 XP:</strong> Task Padawan</li>
+              <li><strong>501 XP:</strong> Productivity Ninja</li>
+              <li><strong>1500 XP:</strong> Task Lord</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </main>

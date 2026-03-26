@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { TaskService } from './services/task-service';
 import { GamificationService } from './services/gamification-service';
 import { Priority } from './models/types';
@@ -18,6 +18,19 @@ export class App {
   newTaskPriority = signal<Priority>('Medium');
   newTaskDueDate = signal<string | null>(null);
 
+  // --- NEW FEATURES STATE ---
+  currentFilter = signal<'All' | Priority>('All');
+  showRules = signal(false);
+
+  // Automatically recalculates the list whenever the filter or tasks change
+  filteredTasks = computed(() => {
+    const tasks = this.taskService.tasks();
+    const filter = this.currentFilter();
+    
+    if (filter === 'All') return tasks;
+    return tasks.filter(task => task.priority === filter);
+  });
+
   updateTitle(event: Event) {
     this.newTaskTitle.set((event.target as HTMLInputElement).value);
   }
@@ -31,19 +44,30 @@ export class App {
     this.newTaskDueDate.set(value ? value : null);
   }
 
+  // --- NEW FEATURE METHODS ---
+  updateFilter(event: Event) {
+    this.currentFilter.set((event.target as HTMLSelectElement).value as 'All' | Priority);
+  }
+
+  toggleRules() {
+    this.showRules.set(!this.showRules());
+  }
+
   submitTask() {
     this.taskService.addTask(this.newTaskTitle(), this.newTaskPriority(), this.newTaskDueDate());
-
+    
+    // Reset inputs after submission
     this.newTaskTitle.set('');
     this.newTaskDueDate.set(null); 
   }
 
+  // Determines if a task's due date is older than today
   isOverdue(dueDate: string | null): boolean {
     if (!dueDate) return false;
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
+    today.setHours(0, 0, 0, 0); // Normalize today to midnight
     const taskDate = new Date(dueDate);
-    taskDate.setHours(0, 0, 0, 0); 
+    taskDate.setHours(0, 0, 0, 0); // Normalize task date to midnight
     return taskDate < today;
   }
 }
