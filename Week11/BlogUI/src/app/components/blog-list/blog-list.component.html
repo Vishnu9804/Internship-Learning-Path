@@ -1,1 +1,13 @@
-<p>blog-list works!</p>
+<main class="container">
+  <h1>Latest Posts</h1>
+  <div class="post-grid">
+    <article *ngFor="let post of posts" class="post-card">
+      <h2>{{ post.title }}</h2>
+      <p class="date">{{ post.date }}</p>
+      <p>{{ post.summary }}</p>
+      <a [routerLink]="['/post', post.id]" class="read-more" [attr.aria-label]="'Read full article about ' + post.title">
+        Read more &rarr;
+      </a>
+    </article>
+  </div>
+</main>
