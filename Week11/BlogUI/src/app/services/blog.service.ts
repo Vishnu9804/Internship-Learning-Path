@@ -23,7 +23,6 @@ export class BlogService {
   private initializeDatabase() {
     if (isPlatformBrowser(this.platformId)) {
       const savedData = localStorage.getItem(this.storageKey);
-      
       if (savedData) {
         this.postsSubject.next(JSON.parse(savedData));
       } else {
@@ -41,6 +40,7 @@ export class BlogService {
     }
   }
 
+  // --- READ ---
   getPosts(): Observable<Post[]> {
     return this.postsSubject.asObservable();
   }
@@ -48,5 +48,38 @@ export class BlogService {
   getPostById(id: number): Observable<Post | undefined> {
     const currentPosts = this.postsSubject.value;
     return of(currentPosts.find(p => p.id === id));
+  }
+
+  // --- CREATE ---
+  addPost(postData: Omit<Post, 'id' | 'date'>) {
+    const current = this.postsSubject.value;
+    // Generate a new ID based on the highest existing ID
+    const newId = current.length > 0 ? Math.max(...current.map(p => p.id)) + 1 : 1;
+    // Format today's date
+    const today = new Date().toISOString().split('T')[0];
+    
+    const newPost: Post = { ...postData, id: newId, date: today };
+    const updated = [newPost, ...current]; // Add to top of list
+    
+    this.postsSubject.next(updated);
+    this.saveToStorage(updated);
+  }
+
+  // --- UPDATE ---
+  updatePost(updatedPost: Post) {
+    const current = this.postsSubject.value;
+    const updated = current.map(p => p.id === updatedPost.id ? updatedPost : p);
+    
+    this.postsSubject.next(updated);
+    this.saveToStorage(updated);
+  }
+
+  // --- DELETE ---
+  deletePost(id: number) {
+    const current = this.postsSubject.value;
+    const updated = current.filter(p => p.id !== id);
+    
+    this.postsSubject.next(updated);
+    this.saveToStorage(updated);
   }
 }

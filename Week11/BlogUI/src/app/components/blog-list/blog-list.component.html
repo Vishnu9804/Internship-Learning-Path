@@ -1,13 +1,40 @@
 <main class="container">
-  <h1>Latest Posts</h1>
+  <div class="list-header">
+    <h1>Latest Posts</h1>
+    <a routerLink="/create" class="btn-create" aria-label="Create a new blog post">+ New Post</a>
+  </div>
+
+  <div class="search-container">
+    <label for="search" class="visually-hidden">Search posts</label>
+    <input 
+      type="search" 
+      id="search" 
+      [(ngModel)]="searchTerm" 
+      placeholder="Search by title or summary..." 
+      class="search-bar"
+      aria-label="Search blog posts"
+    >
+  </div>
+
   <div class="post-grid">
-    <article *ngFor="let post of posts" class="post-card">
+    <article *ngFor="let post of filteredPosts" class="post-card">
       <h2>{{ post.title }}</h2>
       <p class="date">{{ post.date }}</p>
       <p>{{ post.summary }}</p>
-      <a [routerLink]="['/post', post.id]" class="read-more" [attr.aria-label]="'Read full article about ' + post.title">
-        Read more &rarr;
-      </a>
+      
+      <div class="card-actions">
+        <a [routerLink]="['/post', post.id]" class="read-more" [attr.aria-label]="'Read full article about ' + post.title">
+          Read more &rarr;
+        </a>
+        <div class="admin-actions">
+          <a [routerLink]="['/edit', post.id]" class="btn-edit" [attr.aria-label]="'Edit ' + post.title">Edit</a>
+          <button (click)="deletePost(post.id, post.title)" class="btn-delete" [attr.aria-label]="'Delete ' + post.title">Delete</button>
+        </div>
+      </div>
     </article>
+
+    <div *ngIf="filteredPosts.length === 0" class="no-results">
+      <p>No posts found matching your search.</p>
+    </div>
   </div>
 </main>
