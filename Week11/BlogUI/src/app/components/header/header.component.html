@@ -1,1 +1,12 @@
-<p>header works!</p>
+<header class="navbar">
+  <div class="container nav-content">
+    <a routerLink="/" class="logo" aria-label="Go to homepage">Tech Blog</a>
+    
+    <button 
+      (click)="toggle()" 
+      class="theme-toggle" 
+      [attr.aria-label]="(themeService.theme$ | async) === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'">
+      {{ (themeService.theme$ | async) === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode' }}
+    </button>
+  </div>
+</header>
