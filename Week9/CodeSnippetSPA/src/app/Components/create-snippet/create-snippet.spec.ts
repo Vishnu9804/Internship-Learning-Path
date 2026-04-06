@@ -28,8 +28,6 @@ describe('CreateSnippet', () => {
     fixture.detectChanges();
   });
 
-  // ... keep imports and beforeEach exactly the same ...
-
   it('should create the snippet component', () => {
     expect(component).toBeTruthy();
   });

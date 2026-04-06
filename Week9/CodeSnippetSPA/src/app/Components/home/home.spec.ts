@@ -28,8 +28,6 @@ describe('Home', () => {
     fixture.detectChanges();
   });
 
-// ... keep imports and beforeEach exactly the same ...
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

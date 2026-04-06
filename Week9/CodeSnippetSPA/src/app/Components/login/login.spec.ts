@@ -29,8 +29,6 @@ describe('Login', () => {
     fixture.detectChanges();
   });
 
-  // ... keep imports and beforeEach exactly the same ...
-
   it('should create the login component', () => {
     expect(component).toBeTruthy();
   });
