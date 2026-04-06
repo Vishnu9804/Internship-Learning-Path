@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { vi, Mock } from 'vitest';
 import * as firebaseAuth from 'firebase/auth';
 
-// Intercept all Firebase Auth functions
 vi.mock('firebase/auth', () => ({
   getAuth: vi.fn(),
   onAuthStateChanged: vi.fn(),
@@ -13,7 +12,6 @@ vi.mock('firebase/auth', () => ({
   signOut: vi.fn()
 }));
 
-// Helper to wait for internal promise chains to finish
 const flushPromises = () => new Promise(resolve => setTimeout(resolve, 0));
 
 describe('Auth Service', () => {
@@ -22,8 +20,7 @@ describe('Auth Service', () => {
 
   beforeEach(() => {
     routerSpy = { navigate: vi.fn() };
-    
-    // Suppress console logs and alerts during testing
+
     vi.spyOn(console, 'log').mockImplementation(() => {});
     vi.spyOn(window, 'alert').mockImplementation(() => {});
 
@@ -44,7 +41,6 @@ describe('Auth Service', () => {
     expect(service.isAuthenticated()).toBe(false);
     expect(service.getUid()).toBeNull();
 
-    // Manually set signal to simulate being logged in
     service.uid.set('fake-user-id');
     
     expect(service.isAuthenticated()).toBe(true);
@@ -119,7 +115,6 @@ describe('Auth Service', () => {
 
       service.logout();
       await flushPromises();
-      // Test passes if it handles the rejection without crashing
       expect(signOutMock).toHaveBeenCalled();
     });
   });

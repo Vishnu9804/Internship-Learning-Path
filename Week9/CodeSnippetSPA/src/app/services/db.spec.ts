@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { vi, Mock } from 'vitest';
 import * as firestore from 'firebase/firestore';
 
-// Intercept all Firebase Firestore functions
 vi.mock('firebase/firestore', () => ({
   getFirestore: vi.fn(), 
   collection: vi.fn(), 
@@ -69,7 +68,6 @@ describe('Db Service', () => {
     it('should retrieve mapped snippets array', async () => {
       const getDocsMock = firestore.getDocs as Mock;
       
-      // Create a fake snapshot matching Firebase's structure
       const fakeSnapshot = [
         { id: '1', data: () => ({ title: 'Snippet 1', code: 'Code 1' }) },
         { id: '2', data: () => ({ title: 'Snippet 2', code: 'Code 2' }) }
@@ -83,7 +81,7 @@ describe('Db Service', () => {
 
       expect(getDocsMock).toHaveBeenCalled();
       expect(result.length).toBe(2);
-      expect(result[0]['title']).toBe('Snippet 1'); // Fixed here
+      expect(result[0]['title']).toBe('Snippet 1'); 
     });
   });
 
@@ -99,7 +97,7 @@ describe('Db Service', () => {
       const result = await service.getSnippetById('123');
 
       expect(getDocMock).toHaveBeenCalled();
-      expect(result['title']).toBe('Found Snippet'); // Fixed here
+      expect(result['title']).toBe('Found Snippet'); 
     });
 
     it('should return a "not found" fallback if document does not exist', async () => {
@@ -112,8 +110,8 @@ describe('Db Service', () => {
       const result = await service.getSnippetById('999');
 
       expect(getDocMock).toHaveBeenCalled();
-      expect(result['title']).toBe('not found'); // Fixed here
-      expect(result['id']).toBe(''); // Fixed here
+      expect(result['title']).toBe('not found'); 
+      expect(result['id']).toBe(''); 
     });
   });
 });
