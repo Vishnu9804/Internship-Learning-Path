@@ -1,37 +1,28 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ViewSnippet } from './view-snippet';
+import { Component, inject, signal } from '@angular/core';
 import { Db } from '../../services/db';
 import { ActivatedRoute } from '@angular/router';
-import { vi } from 'vitest';
+import { SnippetBox } from '../snippet-box/snippet-box';
 
-describe('ViewSnippet', () => {
-  let component: ViewSnippet;
-  let fixture: ComponentFixture<ViewSnippet>;
-  let dbSpy: any;
-
-  beforeEach(async () => {
-    dbSpy = {
-      getSnippetById: vi.fn().mockResolvedValue({ title: 'Test', code: 'console.log("test");' })
-    };
-
-    await TestBed.configureTestingModule({
-      imports: [ViewSnippet],
-      providers: [
-        { provide: Db, useValue: dbSpy },
-        // Fix for "No provider found for ActivatedRoute"
-        { 
-          provide: ActivatedRoute, 
-          useValue: { snapshot: { paramMap: { get: () => '1' } } } 
-        }
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ViewSnippet);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+@Component({
+  selector: 'app-view-snippet',
+  standalone: true,
+  imports: [SnippetBox],
+  templateUrl: './view-snippet.html',
+  styleUrl: './view-snippet.css'
+})
+export class ViewSnippet {
+  dbService = inject(Db);
+  route = inject(ActivatedRoute);
+  
+  codeSnippet = signal({
+    title: "",
+    code: ""
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  ngOnInit() {
+    const docId = this.route.snapshot.paramMap.get('id');
+    this.dbService.getSnippetById(docId!).then((data: any) => {
+      this.codeSnippet.set(data);
+    });
+  }
+}
