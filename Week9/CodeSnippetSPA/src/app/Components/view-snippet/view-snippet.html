@@ -1,14 +1,14 @@
-<div class="page-container">
-    <div class="snippet-header">
-        <h2 class="snippet-title">{{codeSnippet().title}}</h2>
+<div class="max-w-5xl mx-auto my-12 px-6">
+    <div class="mb-8">
+        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">{{codeSnippet().title}}</h2>
     </div>
 
-    <div class="code-window">
-        <div class="mac-header">
-            <div class="dot red"></div>
-            <div class="dot yellow"></div>
-            <div class="dot green"></div>
+    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-2xl border border-slate-800">
+        <div class="bg-slate-800 px-4 py-3 flex gap-2 items-center border-b border-slate-700">
+            <div class="w-3.5 h-3.5 rounded-full bg-red-500 shadow-sm"></div>
+            <div class="w-3.5 h-3.5 rounded-full bg-yellow-500 shadow-sm"></div>
+            <div class="w-3.5 h-3.5 rounded-full bg-green-500 shadow-sm"></div>
         </div>
-        <pre><code>{{codeSnippet().code}}</code></pre>
+        <pre class="p-6 overflow-x-auto"><code class="text-slate-300 font-mono text-sm leading-relaxed">{{codeSnippet().code}}</code></pre>
     </div>
 </div>
